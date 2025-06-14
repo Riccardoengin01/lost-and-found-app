@@ -23,3 +23,8 @@ The app will listen on port `5000` by default.
 
 Some routes (like viewing the archive or exporting data) require an administrator password. The password is defined in `app.py` as `admin123` and must be provided via the `pwd` query parameter when accessing protected routes.
 
+
+## Sample Data
+
+The `sample-data` directory holds example files (`oggetti.csv`, `oggetti.json` and `salva_csv`) that demonstrate the data format. They are not used by the application at runtime and are provided for reference only.
+
