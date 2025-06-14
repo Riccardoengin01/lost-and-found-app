@@ -7,7 +7,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
 DATA_FOLDER = "data"
 CSV_FILE = os.path.join(DATA_FOLDER, "oggetti.csv")
-ADMIN_PASSWORD = "admin123"
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(DATA_FOLDER, exist_ok=True)
