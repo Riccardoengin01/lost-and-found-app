@@ -28,3 +28,12 @@ Some routes (like viewing the archive or exporting data) require an administrato
 
 The `sample-data` directory holds example files (`oggetti.csv`, `oggetti.json` and `salva_csv`) that demonstrate the data format. They are not used by the application at runtime and are provided for reference only.
 
+
+## Tests
+
+Install the additional development requirements and run the test suite with:
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+The tests simply verify that key routes return HTTP 200 responses.
