@@ -28,6 +28,11 @@ def salva_oggetti(oggetti):
         ])
         writer.writeheader()
         writer.writerows(oggetti)
+    try:
+        from drive_utils import backup_data
+        backup_data()
+    except Exception as e:
+        print(f"Drive backup error: {e}")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
