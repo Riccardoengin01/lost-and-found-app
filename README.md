@@ -21,7 +21,7 @@ The app will listen on port `5000` by default.
 
 ## Admin Password
 
-Some routes (like viewing the archive or exporting data) require an administrator password. The password is defined in `app.py` as `admin123` and must be provided via the `pwd` query parameter when accessing protected routes.
+Some routes (like viewing the archive or exporting data) require an administrator password. The application reads the password from the `ADMIN_PASSWORD` environment variable and falls back to `admin123` if it is not set. Provide the password via the `pwd` query parameter when accessing protected routes.
 
 
 ## Sample Data
