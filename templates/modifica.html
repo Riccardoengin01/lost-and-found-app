@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifica Oggetto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Modifica Oggetto Smarrito</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    <label>Descrizione:</label><br>
+    <input type="text" name="descrizione" value="{{ oggetto['descrizione'] }}" required><br><br>
+
+    <label>Luogo:</label><br>
+    <input type="text" name="luogo" value="{{ oggetto['luogo'] }}" required><br><br>
+
+    <label>Data/Ora:</label><br>
+    <input type="text" name="data_ora" value="{{ oggetto['data_ora'] }}" required><br><br>
+
+    <label>Ritrovato da:</label><br>
+    <input type="text" name="ritrovato_da" value="{{ oggetto['ritrovato_da'] }}"><br><br>
+
+    <label>Operatore:</label><br>
+    <input type="text" name="operatore" value="{{ oggetto['operatore'] }}" required><br><br>
+
+    <label>Ufficio:</label><br>
+    <select name="ufficio" required>
+      {% for codice in ["BF", "VS", "VF", "LP", "BTD"] %}
+        <option value="{{ codice }}" {% if oggetto['ufficio'] == codice %}selected{% endif %}>{{ codice }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>Notificato?</label><br>
+    <select name="notificato" required>
+      <option value="sì" {% if oggetto['notificato'] == 'sì' %}selected{% endif %}>Sì</option>
+      <option value="no" {% if oggetto['notificato'] == 'no' %}selected{% endif %}>No</option>
+    </select><br><br>
+
+    <label>Ritirato?</label><br>
+    <select name="ritirato" required>
+      <option value="sì" {% if oggetto['ritirato'] == 'sì' %}selected{% endif %}>Sì</option>
+      <option value="no" {% if oggetto['ritirato'] == 'no' %}selected{% endif %}>No</option>
+    </select><br><br>
+
+    <label>Note aggiuntive:</label><br>
+    <textarea name="note">{{ oggetto['note'] }}</textarea><br><br>
+
+    <label>Foto (sovrascrive l'attuale se presente):</label><br>
+    <input type="file" name="foto"><br><br>
+
+    <input type="submit" value="💾 Salva modifiche">
+  </form>
+
+  <p><a href="/">⬅️ Torna alla dashboard</a></p>
+</body>
+</html>

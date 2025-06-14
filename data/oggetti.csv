@@ -1,0 +1,14 @@
+id,descrizione,luogo,data_ora,ritrovato_da,operatore,ufficio,notificato,ritirato,note,path_foto,data_inserimento,data_archiviazione
+ef4fa8b6-ae7c-4648-b35b-b2db39b67e90,Scarpa,Badia Fiesolana,2025-06-05T15:21,Ricercatore,Ibrahim,BF,no,no,,,2025-06-14 21:28:41,2025-09-12
+352ad1c4-1c2e-4764-bb22-8d1d2857689e,scarpa ,Mensa,202515-06-10T18:18,Ricercatore,Ibrahim,BF,sì,no,,,2025-06-14 21:37:29,2025-07-14
+230a0e2d-26e2-46e9-afd1-348f3e73874c,Scarpa,Mensa,2025-06-14T19:58,Ricercatore,Ibra,BF,sì,no,,,2025-06-14 21:40:28,2025-07-14
+BF001,Scarpa,Mensa,2025-06-14T19:25,Ricercatore,Ibrahim,BF,no,sì,,,2025-06-14 21:45:00,2025-09-12
+BF002,Sciarpa,Bagno BF232,2025-06-14T19:25,Alunno,Antonello,BF,no,no,,,2025-06-14 21:47:52,2025-09-12
+BF003,Sciarpa,Cortile,2025-06-15T21:53,Ricercatore,Ibra,BF,sì,no,,,2025-06-14 21:54:06,2025-07-14
+BF004,Scarpa,Mensa,2025-06-15T19:25,Ricercatore,Sandra,BF,no,no,,static/uploads\4c1b92e53cf74e238514d9c1e7a5ef19_Screenshot_2025-06-14_214920.png,2025-06-14 21:55:21,2025-09-12
+BF005,Tablet,Area Ristoro,2025-06-15T19:58,Alunno,Ibra,BF,sì,no,,static/uploads\f54d9951cf7b4bfcb7767ce1623da48e_20250613_091301000_iOS.jpg,2025-06-14 22:00:58,2025-07-14
+VF001,PC,Mensa,2025-06-15T19:58,Ricercatore,Ibra,VF,sì,no,,static/uploads\73ce0c50801644d6ad8f6795f123794f_20250604_071304453_iOS.jpg,2025-06-14 22:03:31,2025-07-14
+BTD001,Sciarpa,Mensa,2025-06-15T19:58,Professore,Sandra,BTD,sì,no,,static/uploads\a1980583ec964a0fb7ab426609345c01_20250602_124504924_iOS.jpg,2025-06-14 22:06:07,2025-07-14
+BTD002,cappello,mensa,2025-06-15T19:07,ricercatore,sandra,BTD,no,sì,,static/uploads\ab014a7e55624f6c9ea1ab816ac19d78_20250604_114929000_iOS_1.jpg,2025-06-14 22:11:30,2025-09-12
+BF009,mela verde,nfhde ,2025-06-15T15:45,nnn,sandra,BF,no,no,,static/uploads\1f7bbfe40ef445de8d5d247aa402b976_20250604_174936000_iOS.jpg,2025-06-14 22:15:03,2025-09-12
+BTD003,sciarpa,mensa,2025-06-15T12:25,alunno,sandra,BTD,no,no,,static/uploads\6d686aa58ac1491889f4b2721170d73a_20250611_062031009_iOS.jpg,2025-06-14 22:18:29,2025-09-12

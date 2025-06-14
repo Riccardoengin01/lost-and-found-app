@@ -1,0 +1,27 @@
+[
+  {
+    "id": "BF-001",
+    "sede": "Badia Fiesolana",
+    "descrizione": "Sciarpa",
+    "data": "2025-06-08",
+    "luogo": "Badia Fiesolana",
+    "notificato": "sì"
+  },
+  {
+    "id": "VF-001",
+    "sede": "Villa la Fonte",
+    "descrizione": "Ombrello nero",
+    "data": "2025-06-08",
+    "luogo": "Mensa",
+    "notificato": "sì"
+  },
+  {
+    "id": "BT-001",
+    "sede": "Palazzo Buontalenti",
+    "descrizione": "Sciarpa",
+    "data": "2025-06-08",
+    "luogo": "Mensa",
+    "notificato": "no",
+    "foto": "BT-001.png"
+  }
+]

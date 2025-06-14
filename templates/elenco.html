@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Elenco Oggetti Smarriti</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Elenco Oggetti Smarriti</h1>
+  <a href="/">← Torna all'inserimento</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Descrizione</th>
+        <th>Luogo</th>
+        <th>Data/Ora</th>
+        <th>Ufficio</th>
+        <th>Notificato</th>
+        <th>Ritirato</th>
+        <th>Foto</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for oggetto in oggetti %}
+        <tr>
+          <td>{{ oggetto['descrizione'] }}</td>
+          <td>{{ oggetto['luogo'] }}</td>
+          <td>{{ oggetto['data_ora'] }}</td>
+          <td>{{ oggetto['ufficio'] }}</td>
+          <td>{{ oggetto['notificato'] }}</td>
+          <td>{{ oggetto['ritirato'] }}</td>
+          <td>
+            {% if oggetto['path_foto'] %}
+              <img src="{{ url_for('static', filename=oggetto['path_foto'].split('static/')[-1]) }}" width="80">
+            {% else %}
+              -
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

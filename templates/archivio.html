@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Archivio Oggetti Smarriti</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #eee;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .info {
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Archivio Oggetti Smarriti</h1>
+  <div>
+    <a href="/dashboard?pwd=admin123">⬅️ Torna alla dashboard</a>
+  </div>
+
+  <div class="grid">
+    {% for o in oggetti %}
+    <div class="card">
+      {% if o['path_foto'] %}
+      <img src="{{ '/' + o['path_foto'] }}" alt="foto">
+      {% endif %}
+      <div class="info">
+        <strong>{{ o['id'] }}</strong><br>
+        {{ o['descrizione'] }}<br>
+        <em>{{ o['ufficio'] }}</em><br>
+        Scadenza: {{ o['data_archiviazione'] }}<br>
+        Ritirato: {{ o['ritirato'] }}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

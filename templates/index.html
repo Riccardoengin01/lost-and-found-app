@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrazione Oggetto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Registrazione Oggetto Smarrito</h1>
+  <form action="/" method="post" enctype="multipart/form-data">
+    <label>Descrizione:</label><br>
+    <input type="text" name="descrizione" required><br>
+
+    <label>Luogo del ritrovamento:</label><br>
+    <input type="text" name="luogo" required><br>
+
+    <label>Data/ora del ritrovamento:</label><br>
+    <input type="datetime-local" name="data_ora" required><br>
+
+    <label>Ritrovato da (facoltativo):</label><br>
+    <input type="text" name="ritrovato_da"><br>
+
+    <label>Operatore (nome):</label><br>
+    <input type="text" name="operatore" required><br>
+
+    <label>Ufficio:</label><br>
+    <select name="ufficio" required>
+      <option value="BF">Badia Fiesolana</option>
+      <option value="VS">Villa Schifanoia</option>
+      <option value="VF">Villa La Fonte</option>
+      <option value="LP">Villa Il Poggiolo</option>
+      <option value="BTD">Palazzo Buontalenti</option>
+    </select><br>
+
+    <label>Notificato all’utente?</label><br>
+    <input type="radio" name="notificato" value="sì" required> Sì
+    <input type="radio" name="notificato" value="no"> No<br>
+
+    <label>Ritirato da utente?</label><br>
+    <input type="radio" name="ritirato" value="sì" required> Sì
+    <input type="radio" name="ritirato" value="no"> No<br>
+
+    <label>Note aggiuntive:</label><br>
+    <textarea name="note"></textarea><br>
+
+    <label>Foto (opzionale):</label><br>
+    <input type="file" name="foto"><br><br>
+
+    <button type="submit">Inserisci Oggetto</button>
+  </form>
+  <p><a href="{{ url_for('dashboard') }}">Visualizza oggetti smarriti</a></p>
+</body>
+</html>

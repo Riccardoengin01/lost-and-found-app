@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Oggetti Smarriti</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .info {
+      font-size: 14px;
+      color: #333;
+    }
+    .info em {
+      color: #666;
+    }
+    .scadenza {
+      font-size: 12px;
+      color: #888;
+    }
+    a.button-link {
+      display: inline-block;
+      background-color: #0077cc;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    a.button-link:hover {
+      background-color: #005fa3;
+    }
+    .archivia {
+      display: block;
+      margin-top: 5px;
+      color: red;
+      font-size: 13px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dashboard Oggetti Smarriti</h1>
+
+  <div style="margin-bottom: 30px;">
+    <a href="/" class="button-link">➕ Inserisci nuovo oggetto</a>
+    <a href="/admin/export?pwd=admin123" class="button-link">⬇️ Esporta CSV (admin)</a>
+    <a href="/archivio?pwd=admin123" class="button-link">📦 Archivio (admin)</a>
+  </div>
+
+  {% if oggetti %}
+    <div class="grid">
+      {% for o in oggetti %}
+        <div class="card">
+          <a href="/modifica/{{ o['id'] }}">
+            {% if o['path_foto'] %}
+              <img src="{{ '/' + o['path_foto'] }}" alt="foto">
+            {% else %}
+              <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="foto">
+            {% endif %}
+          </a>
+
+          <div class="info">
+            <strong>{{ o['id'] }}</strong><br>
+            {{ o['descrizione'] }}<br>
+            <em>{{ o['ufficio'] }}</em><br>
+            <span class="scadenza">Scadenza: {{ o['data_archiviazione'] }}</span>
+          </div>
+
+          {% if admin %}
+            <a href="/archivia/{{ o['id'] }}?pwd=admin123" class="archivia">🗃️ Archivia manualmente</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p style="text-align:center;">Nessun oggetto attivo in giacenza.</p>
+  {% endif %}
+</body>
+</html>
