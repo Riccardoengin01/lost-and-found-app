@@ -9,7 +9,7 @@ This repository contains a small Flask application used to record found items an
    ```bash
    pip install -r requirements.txt
    ```
-   The only dependency is Flask as listed in `requirements.txt`.
+   Additional packages for optional Google Drive backup are listed in `requirements.txt`.
 
 ## Running the Application
 
@@ -18,6 +18,14 @@ Run the development server with:
 python app.py
 ```
 The app will listen on port `5000` by default.
+
+## Google Drive Backup
+
+If a `credentials.json` file for a Google API project is present in the project
+root, the application will automatically upload `data/oggetti.csv` and any files
+under `static/uploads` to your Google Drive each time the data is saved. On the
+first run you will be prompted to authorize access, which creates `token.json`
+for subsequent executions.
 
 ## Admin Password
 
