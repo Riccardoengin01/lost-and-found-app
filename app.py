@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for, send_file, jsonify
 import os, csv, uuid
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
@@ -33,6 +33,10 @@ def salva_oggetti(oggetti):
         backup_data()
     except Exception as e:
         print(f"Drive backup error: {e}")
+
+def genera_id(ufficio, oggetti):
+    numero = sum(1 for o in oggetti if o["ufficio"] == ufficio)
+    return f"{ufficio}{str(numero + 1).zfill(3)}"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -165,6 +169,93 @@ def export():
     if not os.path.exists(CSV_FILE):
         return "Nessun file CSV disponibile."
     return send_file(CSV_FILE, as_attachment=True)
+
+# REST API
+@app.route("/api/items", methods=["GET"])
+def api_get_items():
+    return jsonify(carica_oggetti())
+
+
+@app.route("/api/items/<id>", methods=["GET"])
+def api_get_item(id):
+    oggetti = carica_oggetti()
+    item = next((o for o in oggetti if o["id"] == id), None)
+    if not item:
+        return jsonify({"error": "Not found"}), 404
+    return jsonify(item)
+
+
+@app.route("/api/items", methods=["POST"])
+def api_create_item():
+    data = request.get_json(force=True)
+    oggetti = carica_oggetti()
+
+    descrizione = data.get("descrizione", "")
+    luogo = data.get("luogo", "")
+    data_ora = data.get("data_ora", "")
+    ritrovato_da = data.get("ritrovato_da", "")
+    operatore = data.get("operatore", "")
+    ufficio = data.get("ufficio", "")
+    notificato = data.get("notificato", "no")
+    ritirato = data.get("ritirato", "no")
+    note = data.get("note", "")
+    path_foto = data.get("path_foto", "")
+
+    data_inserimento = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    giorni = 30 if notificato == "sì" else 90
+    data_archiviazione = (datetime.now() + timedelta(days=giorni)).strftime("%Y-%m-%d")
+
+    codice_id = genera_id(ufficio, oggetti)
+
+    nuovo_oggetto = {
+        "id": codice_id,
+        "descrizione": descrizione,
+        "luogo": luogo,
+        "data_ora": data_ora,
+        "ritrovato_da": ritrovato_da,
+        "operatore": operatore,
+        "ufficio": ufficio,
+        "notificato": notificato,
+        "ritirato": ritirato,
+        "note": note,
+        "path_foto": path_foto,
+        "data_inserimento": data_inserimento,
+        "data_archiviazione": data_archiviazione,
+    }
+
+    oggetti.append(nuovo_oggetto)
+    salva_oggetti(oggetti)
+    return jsonify(nuovo_oggetto), 201
+
+
+@app.route("/api/items/<id>", methods=["PUT"])
+def api_update_item(id):
+    data = request.get_json(force=True)
+    oggetti = carica_oggetti()
+    item = next((o for o in oggetti if o["id"] == id), None)
+    if not item:
+        return jsonify({"error": "Not found"}), 404
+
+    for key in ["descrizione", "luogo", "data_ora", "ritrovato_da", "operatore", "ufficio", "notificato", "ritirato", "note", "path_foto"]:
+        if key in data:
+            item[key] = data[key]
+
+    if "notificato" in data:
+        giorni = 30 if item["notificato"] == "sì" else 90
+        item["data_archiviazione"] = (datetime.now() + timedelta(days=giorni)).strftime("%Y-%m-%d")
+
+    salva_oggetti(oggetti)
+    return jsonify(item)
+
+
+@app.route("/api/items/<id>", methods=["DELETE"])
+def api_delete_item(id):
+    oggetti = carica_oggetti()
+    new_items = [o for o in oggetti if o["id"] != id]
+    if len(new_items) == len(oggetti):
+        return jsonify({"error": "Not found"}), 404
+    salva_oggetti(new_items)
+    return "", 204
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
